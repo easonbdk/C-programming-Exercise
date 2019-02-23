@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void main()
+{
+    printf("This is a GUESS NUMBER Game.\n");
+    int a,b;
+    srand(time(NULL));
+    a=(rand()%100)+1;
+    b=0;
+    while(a!=b){
+        printf("Guess a number from 1 to 100!\n");
+        scanf("%d",&b);
+        if(b>a)
+            printf("Too big!\n");
+        if(b<a)
+            printf("Too small!\n");
+    }
+    printf("Bingo!");
+}
