@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+void main()
+{
+    int a;
+    a=(rand()%100)+1;
+    printf("The Ramdom Number is %d .\n", a);
+}
