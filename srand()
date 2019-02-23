@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h> 
+
+void main()
+{
+    int a;
+    srand(time(NULL));
+    a=(rand()%100)+1;  // To obtain the random number from 1 to 100. 
+    printf("The Ramdom Number is %d .\n", a);
+}
