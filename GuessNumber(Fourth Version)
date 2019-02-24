@@ -16,12 +16,15 @@ void main()
         printf("Input 0 to end the game.\n");
         scanf("%d",&b);
         if(b==0)
-            printf("Game Over!");
             break;
         if(b>a)
             printf("Too big!\n");
         if(b<a)
-            printf("Too small!\n");
+            printf("Too small!\n");        
+
     }
-    printf("Bingo! You Spend %d times. \n", c);
+    if(b!=0)
+        printf("Bingo! You Spend %d times. \n", c);
+    else
+        printf("Game Over!");
 }
