@@ -9,6 +9,6 @@ long F(long n)
 void main()
 {
 	long n;
-	scanf("%d",&n);
-	printf("%d",F(n));
+	scanf("%ld",&n);
+	printf("%ld",F(n));
 }
