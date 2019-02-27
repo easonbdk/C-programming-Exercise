@@ -1,0 +1,26 @@
+/**假設一個數列 K 的前兩項是 0、1，
+
+而之後的每一項為 Kn=2*Kn-1+3Kn-2，由使用者輸入一個正整數 N，印出該數列的第 N 項。
+**/
+
+#include <stdio.h>
+
+long F(long n)  //Function F(n)
+{
+	long a;   // a for calculate terms after second term.
+	if(n==1)
+		return 0;  // First term is 0
+	if(n==2)
+		return 1; // Second term is 1
+	a = 2*F(n-1)+3*F(n-2);
+	return a;
+}
+
+void main()
+{
+	long n;
+	printf("Please input the value N: \n");
+	scanf("%ld", &n);
+	printf("The value of Nth term is %ld.", F(n)); //Assume there's a function F(n) that can calculate the value of Nth term.
+}
+
