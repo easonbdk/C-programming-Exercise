@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+ int W[12]={6, 2, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+ int y, m, d, w;
+ printf("Year have to larger than 1582.\n");
+ printf("Please input the values of year, month,& day: \n");
+ scanf("%d %d %d",&y, &m, &d);
+ w=W[m-1]+y+(y/4)-(y/100)+(y/400);
+ if( (y%4)==0 && (m<3) ){
+ 	w--;
+ 	if((y%100)==0)
+ 		w++;
+ 	if((y%400)==0)
+ 		w--;
+ }
+ printf("%d\n", (w+d)%7);
+ return 0; 
+}
