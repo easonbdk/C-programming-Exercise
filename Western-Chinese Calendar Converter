@@ -1,0 +1,21 @@
+// Author: Eason
+//
+#include <stdio.h> 
+int main()
+{
+	int x,y;
+	printf("Please input an integer greater than 1911.\n");
+	scanf("%d", &x);
+	y = x-1911;
+	if(x>1911)
+	{
+		printf("It's the %dth year of the Republic Era.\n",y);
+		printf("陳奕肇 405430439\n");
+	}
+	else
+	{
+		printf("The number must be greater than 1911.\n");
+		printf("陳奕肇 405430439\n");
+	}
+	return 0;
+}
