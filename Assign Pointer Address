@@ -1,0 +1,17 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int x = 10;
+    int *ptr = &x;
+
+    printf("The value of variable x is : %d\n", x);
+    printf("The memory address of x is : %p\n", &x);
+    printf("The pointer points to : %p\n", ptr);
+
+    return 0;
+}
