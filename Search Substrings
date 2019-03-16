@@ -1,0 +1,33 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <string.h>
+#define LENGTH 80
+
+int main(void) {
+    char source[LENGTH];
+    char search[LENGTH];
+
+    printf("Please input the string: \n");
+    fgets(source, LENGTH, stdin);
+
+    printf("Search substring:\n");
+    fgets(search, LENGTH, stdin);
+
+    // 去除最後的換行字元
+    search[strlen(search) - 1] = '\0';
+
+    char *loc = strstr(source, search);
+
+    if(loc == NULL) {
+        printf("Cannot find the matching string.\n");
+    }
+    else {
+        printf("Found the substring at the %luth index.\n", loc - source);
+    }
+
+    return 0;
+}
