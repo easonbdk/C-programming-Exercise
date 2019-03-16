@@ -1,0 +1,15 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int x = 10;
+
+    printf("The value of variable x is : %d\n", x);
+    printf("The memory address of x is : %p\n", &x);
+
+    return 0;
+}
