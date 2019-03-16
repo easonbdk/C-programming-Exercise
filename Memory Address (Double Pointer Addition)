@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main(void) {
+    double *ptr = 0;
+
+    printf("ptr 位置：%p\n", ptr);
+    printf("ptr + 1：%p\n", ptr + 1);
+    printf("ptr + 2：%p\n", ptr + 2);
+
+    return 0;
+}
