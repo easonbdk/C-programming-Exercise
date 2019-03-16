@@ -1,0 +1,18 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int x = 10;
+    int *vptr = &x;
+    
+    // printf("%d\n", *vptr);   <- Cannot get the value from pointers with 'void' datatype. 
+	
+	int *iptr = (int*) vptr;  // Convert to 'int' datatype & assign to iptr.
+	printf("%d\n",*iptr);
+	
+    return 0;
+}
