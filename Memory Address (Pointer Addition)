@@ -1,0 +1,16 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int *ptr = 0;
+
+    printf("Memory Address of ptr : %p\n", ptr);
+    printf("ptr + 1：%p\n", ptr + 1);
+    printf("ptr + 2：%p\n", ptr + 2);
+
+    return 0;
+}
