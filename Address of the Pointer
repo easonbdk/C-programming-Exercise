@@ -1,0 +1,20 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int p = 10;
+    int *ptr = &p;
+
+    printf("The value of P is : %d\n", p);
+    printf("The memory address of p is : %p\n", &p);
+    printf("The value of *ptr is : %d\n", *ptr);
+
+    printf("The memory address where the value of ptr being saved is : %p\n", ptr);
+    printf("The memory address of pointer ptr is: %p\n", &ptr);
+
+    return 0;
+}
