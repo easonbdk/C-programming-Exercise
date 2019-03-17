@@ -1,0 +1,22 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+// Use character pointer to print strings. (Two dimensional matrix)
+
+#include <stdio.h>
+
+int main(void) {
+    char *str[][2] = {
+        "Professor", "Justin",
+        "Teacher", "Momor", 
+        "Student", "Caterpillar"
+    };
+
+    for(int i = 0; i < 3; i++) {
+        printf("%s: %s\n", str[i][0], str[i][1]);
+    }
+
+    return 0;
+}
