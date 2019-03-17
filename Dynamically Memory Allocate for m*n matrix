@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int m = 0;
+    int n = 0;
+
+    printf("Please input (m , n) for the m*n matrix : \n");
+    scanf("%d*%d", &m, &n);
+
+    int *ptr = malloc(m * n * sizeof(int));   // Dynamically Memory Allocate for m*n int.
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            *(ptr + n*i + j) = i + j;
+        }
+    }
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("%d\t", *(ptr+n*i+j));
+        }
+        putchar('\n');
+    }
+
+    free(ptr);
+
+    return 0;
+}
