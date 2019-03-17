@@ -1,0 +1,39 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int size = 0;
+
+    printf("Please input the size for the one dimensional matrix : \n");
+    scanf("%d", &size);
+    int *arr1 = malloc(size * sizeof(int));      // Dynamically Allocate the memory for (size) int.
+
+    printf("Give the values for elements : \n");
+    for(int i = 0; i < size; i++) {
+        printf("arr1[%d] = ", i);
+        scanf("%d" , arr1 + i);
+    }
+
+    printf("Print out the value of each element of arr1: \n");
+    for(int i = 0; i < size; i++) {
+        printf("arr1[%d] = %d\n", i, *(arr1+i));
+    }
+
+    int *arr2 = realloc(arr1, sizeof(int) * size * 2);      // Reallocate the memory
+    printf("Print out the value of each element of arr2: \n");
+    for(int i = 0; i < size * 2; i++) {
+        printf("arr2[%d] = %d\n", i, *(arr2+i));
+    }
+
+    printf("arr1 address: %p\n", arr1);
+    printf("arr2 address: %p\n", arr2);
+
+    free(arr2);
+
+    return 0;
+}
