@@ -1,0 +1,25 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+// Dynamically Memory Allocate
+ 
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main(void) {
+    int *ptr = malloc(sizeof(int));         // malloc( ) will allocate a space for int.  
+
+    printf("Memory Address : %p\n", ptr);   // The memory address for ptr
+    printf("Value：%d\n", *ptr);			// Haven't give the value for the memory.
+
+    *ptr = 200;
+
+    printf("Memory Address:%p\n", ptr);
+    printf("Value：%d\n", *ptr);
+
+    free(ptr);								// Give the memory back.
+
+    return 0;
+}
