@@ -1,0 +1,35 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    int score = 0; 
+    int level = 0; 
+
+    printf("Please input the score (0~100): \n"); 
+    scanf("%d", &score); 
+    level = score / 10; 
+
+    switch(level) { 
+        case 10: 
+        case 9: 
+            puts("Level A");
+            break; 
+        case 8: 
+            puts("Level B");
+            break; 
+        case 7: 
+            puts("Level C");
+            break; 
+        case 6: 
+            puts("Level D");
+            break; 
+        default: 
+            puts("Level E (Failed)");
+    } 
+
+    return 0;
+} 
