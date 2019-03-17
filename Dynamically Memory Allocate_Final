@@ -1,0 +1,38 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+// Dynamically Memory Allocate
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int size = 0;
+
+    printf("Please input the size of the one dimensional matrix: \n");
+    scanf("%d", &size);
+
+    int *arr = malloc(size * sizeof(int));        // Dynamically Memory Allocate for (size) of int.
+
+    printf("Print out the values : \n");
+    for(int i = 0; i < size; i++) {
+        printf("arr[%d] = %d\n", i, *(arr+i));
+    }
+
+    printf("Please give the value for each elements : \n");
+    for(int i = 0; i < size; i++) {
+        printf("arr[%d] = ", i);
+        scanf("%d" , arr + i);
+    }
+
+    printf("Print out the values of elements : \n");
+    for(int i = 0; i < size; i++) {
+        printf("arr[%d] = %d\n", i, *(arr+i));
+    }
+
+    free(arr);
+
+    return 0;
+}
