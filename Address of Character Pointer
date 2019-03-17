@@ -1,0 +1,18 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+
+int main(void) {
+    char *str = "hello";       // Characters Pointer
+	void *add = str; 
+    printf("%s\t%p\n",str, add);
+
+    str = "world";			   // The memory addresses of "hello" and "world" are different.
+    add = str;
+	printf("%s\t%p\n",str, add);
+
+    return 0;
+}
