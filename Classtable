@@ -1,40 +1,56 @@
-// Author: Eason
-//
-*******************************************************************************/
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
 
 #include <stdio.h>
-#include <string.h>
-#define ROW 10
+/***#define DEBUG true
+#ifdef DEBUG
+    #define COLUMN 2
+	#define ROW 3
+#else
+	#define COLUMN 6
+	#define ROW  
+#endif***/	
+#define MAX_CLASS_NAME_SIZE 255
 #define COLUMN 6
+#define ROW 10 
+char *WEEK_DAY_NAME[] = {" ","Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+char *TIME[] = {"08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00"};
+int DAY_x, TIME_y;
+int main(int argc, char *argv[]) {
+	char schedule[COLUMN][ROW][MAX_CLASS_NAME_SIZE];
 
-int main(void) {
-    char classtable[ROW][COLUMN];
-    int i=0, j=0;
-    classtable[0][0] = {" "};
-    classtable[0][1] = {"Monday"};
-    classtable[0][2] = {"Tuesday"};
-    classtable[0][3] = {"Wednesday"};
-    
-    for(i=0; i<=1; i++){
-        for(j=0; j<=COLUMN; j++){
-            
-            
-            printf("Please input the Day name from Sunday to Saturday.\n")
-            scanf("%s", classtable[i][j])
-        }
-    }
-    for(i=1; i<ROW; i++){
-        for(int j=0; j<COLUMN; j++) {
-            maze[i][j] = (i + 1) * (j + 1);
-        }
-    }
+	for (int day = 1; day < COLUMN; day++) {    	    // Let user input all the classes
+		for(int clas = 0; clas < ROW; clas++) {      // day <--> column  ,  class <--> row
+    		printf("Please input the class on %s, %s:\n", WEEK_DAY_NAME[day], TIME[clas]);
+   			scanf("%s", schedule[day][clas]);         
+    	}
+	}
 
-    for(i = 0; i < ROW; i++) {
-        for(j = 0; j < COLUMN; j++) {
-            printf("%d\t", maze[i][j]);
-        }
-        putchar('\n');
-    }
+	for (int day = 0; day < COLUMN; day++) {			// Print out names for the days of the week. 
+		printf("%11s\t", WEEK_DAY_NAME[day]);             
+		}
+	printf("\n");
 
-    return 0;
+	for (int clas = 0; clas < ROW; clas++) {			// Print out the schedule that the user input.
+		printf("%11s", TIME[clas]);
+		for (int day = 0; day < COLUMN; day++) {
+			printf("%8s\t", schedule[day][clas]);     
+  		}
+		printf("\n\n");
+	}
+
+	//system("pause");
+
+	printf("To check the class in the schedule, please input the name for the day of the week, and the time for that class.\n\n");
+	printf("1: Mon.\t2: Tue.\t3: Wed.\t4. Thu.\t5. Fri.\n\n");
+	printf("0: 0800-0900\t1: 0900-1000\t2: 1000-1100\t3: 1100-1200\t4: 1200-1300\n5: 1300-1400\t6: 1400-1500\t7: 1500-1600\t8: 1600-1700\t9: 1700-1800\n");
+	fflush(stdin);
+	scanf("%d %d",&DAY_x, &TIME_y);
+	int day = DAY_x;
+	int clas = TIME_y;
+	printf("The class is : %s", schedule[day][clas]);
+	return 0;
 }
