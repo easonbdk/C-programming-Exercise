@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXSTACK 100 	// Define the max capacity of the stack
+int stack[MAXSTACK];  	// Define the stack array 
+int top=-1;				// Top of the stack
+int isEmpty();
+void push(int); 
+int pop();
+ 
+int main(int argc, char *argv[]) {
+	int value;
+	int i,j;
+	printf("How many data are you gonna input?\n");
+	scanf("%d", &j);
+	printf("Please input all the pieces of your data: \n");
+	for(i=0; i<j; i++){
+		scanf("%d",&value);
+		push(value);
+	}
+	printf("==========================\n");
+	while(!isEmpty()){
+		printf("The data that pop out is: %d\n",pop()); 
+	}
+	pop();
+	return 0;
+}
+/*Judge whether the stack is empty.*/
+int isEmpty(){
+	if(top==-1){
+		return 1; 
+	}else{
+		return 0;
+	}
+} 
+/*Push the data into the stack.*/
+void push(int data){
+	if(top>=MAXSTACK){
+		printf("The stack is full already.\n");	
+	}else{
+		top++;
+		stack[top]=data;
+	}
+ 
+} 
+/*Pop out the data from the stack.*/
+int pop(){
+	int data;
+	if(isEmpty()){
+		printf("The stack is empty.\n");
+	}else{
+		data=stack[top];
+		top--;
+		return data; 
+	}
+}
