@@ -1,35 +1,35 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#define max 5
-int push(char stack[max][80], int *top, char data[80])
+#define max 10
+int push(char stack[max][80], int *top, char data[80])   // Function push { return_type function_name( parameter list )  }  where the stack can save [max]data, and each data can have 80 characters.
 {
-      if(*top == max -1)     	// Stack is full.
-            return(-1);
+      if(*top == max -1)      // Stack is full. 
+            return(-1);   // If Stack is full, return -1.
       else
       {
-            *top = *top + 1;
+            *top = *top + 1; // else value of *top -> +1
             strcpy(stack[*top], data);    // "Copy the string"  The first parameter means the target character array, and the second parameter means the StringSource.
-            return(1);
+            return(1);   // return 1
       }
 }
-int pop(char stack[max][80], int *top, char data[80])
+int pop(char stack[max][80], int *top, char data[80]) // Function pop
 {
-      if(*top == -1)     		 // Stack is empty.
-            return(-1);
+      if(*top == -1)        // Stack is empty.
+            return(-1);    // If Stack is empty, return -1.
       else
       {
             strcpy(data, stack[*top]);   // Copy the string from stack[*top] to data.
-            *top = *top - 1;	
-            return(1);
+            *top = *top - 1;  
+            return(1);    // return 1
       }
 }
-int main()
+int main() // Main function
 {
       char stack[max][80], nm[80];
       int top, ch, reply;      // ch = channel
-      top = -1;  	// Initialize Stack
-      printf("\tMENU");
+      top = -1;   // Initialize Stack
+      printf("\tMENU"); 
       printf("\n----------------------------\n");
       printf("      1. PUSH\n");
       printf("      2. POP\n");
@@ -43,12 +43,12 @@ int main()
             {
                   case 1 : // push
                         printf("\nEnter string : ");
-                        scanf("%s",nm);
-                        reply = push(stack, &top, nm);
+                        scanf("%s", nm);
+                        reply = push(stack, &top, nm);  // Run the function push. 
                         if(reply == -1)
                               printf("\n Stack is Full.\n");
                         else
-                              printf("'%s' is Pushed in Stack.\n\n",nm);
+                              printf("'%s' is Pushed in Stack.\n\n",nm);  
                   break;
                   case 2 : // pop
                         reply = pop(stack, &top,nm);
