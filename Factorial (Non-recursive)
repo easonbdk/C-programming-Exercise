@@ -1,0 +1,21 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+int main(int n) {
+	printf("Please input a number n. \n");
+	printf("The return value means the factorial of n.\n");
+	scanf("%d", &n);
+	if(n==0)
+		return 1;
+	else	//(n>0)
+	{     
+	int s=1, i;
+	for(i=1; i<=n; i++)
+		s = s*i;
+	return s;
+	}
+}
+
