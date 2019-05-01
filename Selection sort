@@ -1,0 +1,46 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define MAX_SIZE 101
+#define SWAP(x,y,t) ((t)=(x), (x)=(y), (y)=(t))   /* Define the way to swap, (x,y,t) -> (y,t,x) */
+void sort(int[], int);  /* Selection Sort */
+	
+	void main(void)
+	{
+		int i, n;
+		int list[MAX_SIZE];
+		printf("Enter the Number of numbers to generate: ");
+		scanf("%d", &n);
+		if(n<1 || n>MAX_SIZE){		/* Exit the program if the input is improper */
+			fprintf(stderr, "Improper value of n.\n");
+			exit(1);
+		}
+		
+		for(i=0; i<n; i++){		/* Randomly generate n numbers from 0 to 9 into the list*/
+			list[i] = rand()%10;		
+			printf("%d\n", list[i]);
+		}
+		
+		sort(list, n);
+		printf("Sorted array: ");
+		for(i=0; i<n; i++)
+			printf("%d", list[i]);	/* Print out sorted numbers */
+			printf("\n");
+	}
+	
+	void sort(int list[], int n)	/* sort function */
+	{
+		int i, j, min, temp;
+		for(i=0; i<n-1; i++){
+			min = i;
+			for(j=i+1; j<n; j++)
+				if(list[j]<list[min])
+					min = j;
+			SWAP(list[i], list[min], temp);	 /* After SWAP : (list[min], temp, list[i]) */
+		}
+	}
