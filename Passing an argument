@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* create_array(int, int);
+void delete_array(int*);
+
+int main(void) {
+    int size = 0;
+
+    printf("Size of the matrix: ");
+    scanf("%d", &size);
+
+    int *arr = create_array(size, 0);	
+
+    for(int i = 0; i < size; i++) {
+        arr[i] = i;5 
+    }
+
+    for(int i = 0; i < size; i++) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+
+    delete_array(arr);
+
+    return 0;
+}
+
+// 傳回建立的陣列位址
+int* create_array(int size, int init) {
+    int *arr = malloc(size * sizeof(int));
+    for(int i = 0; i < size; i++) {
+        arr[i] = init;
+    }
+
+    return arr;
+}
+
+void delete_array(int* arr) {
+    free(arr);
+}
