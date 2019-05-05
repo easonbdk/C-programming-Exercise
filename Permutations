@@ -1,0 +1,25 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+void perm(char *list, int i, int n)
+/* Generate all permutations of list[i] to list[n] */
+{
+	int j, temp;
+	if (i==n){
+		for (j=1; j<=n; j++)
+			printf("%c", list[j]);
+	}
+	else{ 		 /* list[i] to list[n] has more than 
+	           		one permutation, generate these recursively. */
+	for (j=i; j<=n; j++){ 
+		SWAP(list[i], list[j]);
+		perm(list, i+1, n);      // recursive call
+		SWAP(list[i], list[j]);	
+		} 
+	}
+ } 
