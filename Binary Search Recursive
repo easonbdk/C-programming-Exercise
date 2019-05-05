@@ -1,0 +1,23 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+int Binsearch(int list[], int searchnum, int left, int right)
+{
+	/* Search list[0] <= ... <= list[n-1] for searchnum.
+	   Return its position if found. Otherwise return -1. */	
+	int middle;
+	if (left <= right){
+		middle = (left + right)/2;
+		switch(COMPARE(list[middle], searchnum)){
+			case"<": return binsearch(list, searchnum, middle+1, right);
+			case"=": return middle;
+			case">": return binsearch(list, searchnum, left, middle-1); 
+		}
+	}
+	return -1;
+}
