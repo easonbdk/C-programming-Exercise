@@ -1,0 +1,18 @@
+/***************************************************************
+
+                	    Author: Eason
+
+***************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+void Hanoi(int n, char A, char B, char C)
+{
+	if (n==1)
+		printf("Move disk%d from %c to %c\n", n, A, C);
+	else{	// n>1
+		Hanoi(n-1, A, C, B);
+		printf("Move disk%d from %c to %c \n", n, A, C);
+		Hanoi(n-1, B, A, C);
+	}
+}
