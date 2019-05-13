@@ -1,0 +1,226 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+#include<float.h>
+
+#define N 10000    // 設定最大輸入算式長度為 10000
+
+char stack[N];     // char堆疊
+float stack1[N];   // float堆疊
+int top=-1;        // 堆疊用
+char infix[N];     // 儲存中序運算式
+char postfix[N];   // 儲存後序運算式
+int count[N];      // 處理輸入10以上的數字
+
+void push(char c)     // 加入資料於堆疊內 infix_to_postfix 用
+{
+	if(top >= N-1)             // 可省略 因輸入格式按照上面所寫的就不會堆疊超過or堆疊空了, 其餘3個堆疊函式同理
+		printf("堆疊滿了\n");  // 同前一行
+	else
+		stack[++top]=c;        /*進行堆疊*/
+}
+
+char pop()     //刪除堆疊的頂端資料 infix_to_postfix 用
+{
+	if(top == -1)
+		printf("堆疊空了, 輸入格式可能錯了\n");
+	else
+		return(stack[top--]);    /*從堆疊中 拿出 最後放進堆疊的字元*/
+}
+
+void push1(float n)     //同上 但算值時用的(char 與 float 不分開用的話 有時會出錯 寫程式時有測出錯誤)
+{
+	if(top >= N-1) 
+		printf("堆疊滿了\n");
+	else
+		stack1[++top]=n;         /*同理*/
+}
+
+float pop1()     //同上 但 算值時用的(char 與 float 不分開用的話 有時會出錯 寫程式時有測出錯誤)
+{
+	if(top == -1)
+		printf("堆疊空了 輸入格式可能錯了\n");
+	else
+		return(stack1[top--]);     /*同理*/
+}
+
+int p(char c)     //取得運算符的優先權 ^ > (! c p) > (* / %) > (+ -) > ( 
+{
+	if(c=='^')     //次方 ^ 優先權設定 4 最大 以下同理類推
+		return(4);
+	if(c=='*' || c=='/')
+	    return(2);
+    if(c=='%')
+	    return(2);
+    if(c=='+' || c=='-')
+        return(1);
+    if(c=='(')
+        return(0);
+	else           //else 包含 (! c p) 優先權都設定給5
+		return(3);
+}
+
+void infix_to_postfix()    //中序運算式轉為後序運算式
+{
+	char token;
+	int i=0, j=0;
+	while((token=infix[i++])!='\0')    //讀取下一字元，並判斷是否為結束字元
+	{
+		switch(token)
+		{
+		case '(':
+			push(token);           //進行堆疊
+			break;
+	    case ')':
+			while(stack[top]!='(')
+				postfix[j++]=pop();
+			pop();                 //將'('從堆疊內取出後丟棄不要
+			break;
+		case '-':
+		case '+':
+		case '%':
+		case '/':
+		case '*':
+		case '^':
+        case '!':
+		case 'c':
+		case 'p':
+			while((top != -1) && (p(stack[top]) >= p(token)))      //堆疊有符號時，比較優先權
+				postfix[j++]=pop();     //前一個進堆疊的符號比後進入的優先權較大的話 pop()前一個 直接放入後序式
+			push(token);
+			break;
+		default:
+			postfix[j++]=token;   //token為運算元時直接放入後序式
+		}
+	}
+	while(top != -1)       //把在堆疊中剩下的 小優先權 放入後序式 如 1*1+2 來說 在前6、7行時已經把*號放入後序 這邊在把+號放入後序
+		postfix[j++]=pop();
+}
+
+void value(int l)      //算結果
+{
+	char token;
+	int i,j,temp=0,x,y; // x y 處理 %
+	float s,a,b,push_number,aa,bb,nn,cc,pp; // nn => ! ; cc => c ; pp => p
+	for(i=0;i<l;i++)
+	{
+		token=postfix[i];
+		aa=1;
+		bb=1;
+		nn=1;
+		if(token == '+')          //碰到運算符號( + * )進行堆疊處理 以下同理
+			push1(pop1()+pop1());
+		if(token == '*')
+			push1(pop1()*pop1());
+		if(token == '-')          // - / % ^ ! c p 等7個符號  因堆疊為先進後出 故 前後要對換 以下同理 
+		{
+			a=pop1();
+			b=pop1();
+			push1(b-a);
+		}
+		if(token == '/')
+		{
+			a=pop1();
+			b=pop1();
+			push1(b/a);
+		}
+		if(token == '%')
+		{
+			x=pop1();
+			y=pop1();
+			push1(y%x);
+		}
+		if(token == '^')
+		{
+			a=pop1();
+			b=pop1();
+			push1(pow(b,a));
+		}
+		if(token == '!')     //用一個for算 幾階層
+		{
+			a=pop1();
+			b=pop1();
+			for(s=a;s<=b;s++)
+				nn=nn*s;
+			push1(nn);
+		}
+		if(token == 'c')     //用簡單幾個for計算c幾取幾 記得一下期未考筆試有考這題
+		{
+			a=pop1();
+			b=pop1();
+			for(s=a+1;s<=b;s++)
+				bb=bb*s;
+			for(s=b-a;s>0;s--)
+				aa=aa*s;
+			cc=bb/aa;
+			push1(cc);
+		}
+		if(token == 'p')     //用簡單幾個for計算p幾取幾
+		{
+			a=pop1();
+			b=pop1();
+			for(s=1;s<=b;s++)
+				bb=bb*s;
+			for(s=b-a;s>0;s--)
+				aa=aa*s;
+			pp=bb/aa;
+			push1(pp);
+		}
+		if(token >= 48 && token <=57)     //處理數字部份
+		{
+			push_number=0;
+			for(j=count[temp]-1;j>=0;j--)                     /***************************************************************/
+			{                                                 /*      用函式in()之結果 處理10以上的數字                      */
+				token=postfix[i++];                           /*      如 10+1 後序為 101+                                    */
+				push_number=push_number+(token-48)*pow(10,j); /*      經count[0]=2 count[1]=1 與pow(,)處理後                 */
+			}                                                 /*      會堆疊成10跟1 stack1[0]=10 stack[1]=1                  */
+			push1(push_number);                               /***************************************************************/
+			i--;
+			temp++;
+		}
+	}
+	printf("結果為:\n%s = %f\n",infix,pop1());
+}
+
+void in()   //不知如何解釋  用例子來說 input 1+11+111+11+1 把數字群分開 再把分別的個數存於count[]中 以在value() 算輸入10以上的數字結果
+{
+	int i,co=0,longinfix,cou=0; 
+	longinfix=strlen(infix);        //算中序長度
+	for(i=0;i<=longinfix;i++)
+	{
+		if(infix[i] >= 48 && infix[i] <=57)
+			co++;          //co計數器
+		else
+		{
+			if(co>0)
+				count[cou++]=co;  //見下面cou註解
+			co=0;
+		}
+	}
+	cou--; 
+} //cou 如例子 1+11+111+11+1 cou 會從0加至4 而count[0]存1 count[1]存2 count[2]存3 count[3]存2 count[4]存1
+
+void main()
+{
+	int i,l;
+	char c='%';
+	printf("Float計算機\n");
+	printf("基本: + - * / ( ) 括號可以n層 可以計算輸入 10 以上的數字\n");
+	printf("多加: %c取餘數  ^為次方  !為階層  c幾取幾  p幾取幾\n\n",c);
+	printf("用法: 正整數%c正整數  數^數 =>像要開√2的話 輸入 2^(1/2)\n\n       正整數!1 (如5階層為 5!1)  正整數c正整數  正整數p正整數\n\n",c);
+	printf("優先權: ^   >   (! c p)   >   (* / %c)   >   (+ -)\n\n",c);
+	printf("請注意:請輸入正規格式, 否則會出現堆疊空了等字眼\n       若要輸入負整數, 格式為(0-正整數) 如-1 => (0-1)\n");
+	printf("\n請輸入算式(不能有空格與小數點), 另外分母不為0:\n");
+    scanf("%s",infix);
+	in();                            //呼叫函式in()功用見副函式註解
+    infix_to_postfix();              //呼叫函式將中序式轉為後序式
+    l=strlen(postfix);               //算後序長度
+    printf("則後序四則運算式為:\n");
+    for(i=0;i<l;i++)                 //將後序印出
+		printf("%c",postfix[i]);
+	printf("\n");
+    value(l);                        //呼叫函式value()將結果算出
+	printf("\n");
+    system("pause");
+}
